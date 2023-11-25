@@ -2,12 +2,26 @@ package test;
 import org.junit.jupiter.api.Test;
 
 import ru.netology.DataGenerator;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static ru.netology.DataGenerator.generateDate;
 
+
+
 public class CardDeliveryTest {
+    @BeforeAll
+    static void serUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
 
     @Test
     void shouldPassChangeDate () {
